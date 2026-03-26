@@ -3,3 +3,8 @@ from selenium.webdriver.common.by import By
 
 class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    ADD_TO_BASKET = (By.CSS_SELECTOR, ".btn-add-to-basket")
+    SUCSESS_ALERTS = (By.CSS_SELECTOR, "div.alert-success div.alertinner")
+    INFO_ALERTS = (By.CSS_SELECTOR, "div.alert-info div.alertinner")
+    PRODUCT_TITLE = (By.CSS_SELECTOR, "article.product_page h1")
+    PRODUCT_PRICE = (By.CSS_SELECTOR, "article.product_page div.product_main p.price_color")

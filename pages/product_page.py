@@ -1,0 +1,41 @@
+from .base_page import BasePage
+from .locators import MainPageLocators
+
+class ProductPage(BasePage):
+    def add_product_to_basket(self):
+        add_to_basket = self.browser.find_element(*MainPageLocators.ADD_TO_BASKET)
+        add_to_basket.click()
+        self.solve_quiz_and_get_code()
+
+    def should_be_success_message(self):
+        pass
+    
+    def success_message_must_contain_product_title(self):
+        product_title = self.browser.find_element(*MainPageLocators.PRODUCT_TITLE).text
+        success_messages = self.browser.find_elements(*MainPageLocators.SUCSESS_ALERTS)
+        
+        product_title_found = False
+        for message in success_messages:
+            if product_title in message.text:
+                print(f"Product title: {product_title} found in success message: {message.text}")
+                product_title_found = True
+                break
+        
+
+        
+        assert product_title_found, "Product title not found in success messages"
+    
+    def info_message_must_contain_product_price(self):
+        product_price = self.browser.find_element(*MainPageLocators.PRODUCT_PRICE).text
+        info_messages = self.browser.find_elements(*MainPageLocators.INFO_ALERTS)
+        
+        product_price_found = False
+        for message in info_messages:
+            if product_price in message.text:
+                print(f"Product price: {product_price} found in info message: {message.text}")
+                product_price_found = True
+                break
+        
+        assert product_price_found, "Product price not found in info messages"
+
+        
