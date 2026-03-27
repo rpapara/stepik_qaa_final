@@ -15,27 +15,27 @@ class ProductPage(BasePage):
         success_messages = self.browser.find_elements(*MainPageLocators.SUCSESS_ALERTS)
         
         product_title_found = False
-        for message in success_messages:
-            if product_title in message.text:
-                print(f"Product title: {product_title} found in success message: {message.text}")
+        for i in range(len(success_messages)):
+            message = success_messages[i]
+            if product_title == message.text:   
+                print(f"Product title: {product_title} found in success message number {i+1}: {message.text}")
                 product_title_found = True
-                break
+                break               
         
-
-        
-        assert product_title_found, "Product title not found in success messages"
+        assert product_title_found, f"Product title not found in success messages. Should be: {product_title}, but presented: {[message.text for message in success_messages]}"
     
     def info_message_must_contain_product_price(self):
         product_price = self.browser.find_element(*MainPageLocators.PRODUCT_PRICE).text
         info_messages = self.browser.find_elements(*MainPageLocators.INFO_ALERTS)
         
         product_price_found = False
-        for message in info_messages:
-            if product_price in message.text:
-                print(f"Product price: {product_price} found in info message: {message.text}")
-                product_price_found = True
-                break
         
-        assert product_price_found, "Product price not found in info messages"
-
+        for i in range(len(info_messages)):
+            message = info_messages[i]
+            if product_price == message.text:
+                print(f"Product price: {product_price} found in info message number {i+1}: {message.text}")
+                product_price_found = True
+                break   
+        
+        assert product_price_found, f"Product price not found in info messages. Should be: {product_price}, but presented: {[message.text for message in info_messages]}"
         
